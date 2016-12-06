@@ -16,7 +16,8 @@ mongoose.connect('mongodb://localhost/basic_mongoose');
 var QuoteSchema = new mongoose.Schema({
  name: String,
  content: String,
- date: { type: Date, default: Date.now }
+ date: { type: Date, default: Date.now }, 
+ likes: { type: Number, default: 0 }
 })
 mongoose.model('Quote', QuoteSchema); 
 var Quote = mongoose.model('Quote');
@@ -61,12 +62,26 @@ app.post('/quotes', function(req, res) {
   })
 })
 
+app.get('/upvote/:id', function(req, res){
+  Quote.findOne({_id: req.params.id}, function(err, quote){
+    quote.likes++;
+    mongoose.save(function(err) {
+      if(err) {
+        console.log('something went wrong');
+      } else { 
+        console.log('successfully edited a quote!');
+        res.redirect('/');
+      }
+    })
+  })
+})
+
 
 
 
 app.get('/quotes/edit/:id', function(req, res) {  
-  Quote.findOne({_id: req.params.id}, function(err, mongoose){
-    res.render('edit', {mongoose})
+  Quote.findOne({_id: req.params.id}, function(err, quote){
+    res.render('edit', {quote})
   })
 })
 
@@ -78,7 +93,7 @@ app.post('/quotes/destroy/:id', function(req, res) {
    if(err) {
       console.log('something went wrong');
     } else { 
-      console.log('successfully removed a mongoose!');
+      console.log('successfully removed a quote!');
       res.redirect('/');
     }
   })
@@ -86,15 +101,15 @@ app.post('/quotes/destroy/:id', function(req, res) {
 
 app.post('/quotes/:id', function(req, res) {
   console.log("POST DATA", req.body);
-  Quote.findOne({_id: req.params.id}, function(err, mongoose){
-    console.log("mongoose", mongoose);
-    mongoose.name = req.body.name || mongoose.name;
-    mongoose.age = req.body.age || mongoose.age;
+  Quote.findOne({_id: req.params.id}, function(err, quote){
+    console.log("quote", quote);
+    quote.name = req.body.name || quote.name;
+    quote.age = req.body.age || quote.age;
     mongoose.save(function(err) {
       if(err) {
         console.log('something went wrong');
       } else { 
-        console.log('successfully edited a mongoose!');
+        console.log('successfully edited a quote!');
         res.redirect('/');
       }
     })
