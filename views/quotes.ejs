@@ -13,9 +13,9 @@
   <h2>Here are the awesome quotes!</h2>
   <div class="container">
 
-    <% quotes.forEach(function(element, index){ %>
-      <p>" <%= element.quote %> "</p>
-      <p>-<%= element.name %> at time</p>
+    <% quotes.forEach(function(quote, index){ %>
+      <p>" <%= quote.content %> "</p>
+      <p>-<%= quote.name %> at <%= quote.date %></p>
     <% }) %>
     
     <br>

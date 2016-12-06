@@ -15,10 +15,10 @@ mongoose.connect('mongodb://localhost/basic_mongoose');
 
 var QuoteSchema = new mongoose.Schema({
  name: String,
- quote: String,
+ content: String,
  date: { type: Date, default: Date.now }
 })
-mongoose.model('Mongoose', QuoteSchema); 
+mongoose.model('Quote', QuoteSchema); 
 var Quote = mongoose.model('Quote');
 
 // Use native promises
@@ -49,14 +49,14 @@ app.post('/quotes', function(req, res) {
   console.log("POST DATA", req.body);
 
   var quote = new Quote({
-    name: req.body.name, quote: req.body.quote
+    name: req.body.name, content: req.body.content
   });
   quote.save(function(err) {
     if(err) {
       console.log('something went wrong');
     } else { 
       console.log('successfully added a quote!');
-      res.redirect('/');
+      res.redirect('/quotes');
     }
   })
 })
