@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Detail</title>
+  <style>
+    form label, form input {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Detail</h1>
+
+
+    <%= mongoose %> 
+  
+
+    <br>
+    <form action="/mongooses/destroy/<%= mongoose.id %> " method="post">
+      <input type="submit" value="X">
+    </form>
+
+    
+    <br>
+    <a href="/mongooses/edit/<%= mongoose.id %>">edit</a>
+
+    <br>
+    <a href="/">home</a>
+  </div>
+</body>
+</html>
