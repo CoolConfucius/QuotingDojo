@@ -42,6 +42,14 @@ app.get('/', function(req, res) {
 
 app.get('/quotes', function(req, res) {
   Quote.find({}, function(err, quotes){
+    function sortbylikes(a, b){
+      if (a.likes < b.likes)
+        return 1;
+      if (a.likes > b.likes)
+        return -1;
+      return 0;
+    }
+    var quotes = quotes.sort(sortbylikes);
     res.render('quotes', {quotes})
   })
 })
