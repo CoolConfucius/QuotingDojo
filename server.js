@@ -15,7 +15,8 @@ mongoose.connect('mongodb://localhost/basic_mongoose');
 
 var QuoteSchema = new mongoose.Schema({
  name: String,
- quote: String
+ quote: String,
+ date: { type: Date, default: Date.now }
 })
 mongoose.model('Mongoose', QuoteSchema); 
 var Quote = mongoose.model('Quote');
@@ -44,29 +45,32 @@ app.get('/quotes', function(req, res) {
   })
 })
 
-app.post('/mongooses', function(req, res) {
+app.post('/quotes', function(req, res) {
   console.log("POST DATA", req.body);
 
-  var mongoose = new Quote({
-    name: req.body.name, age: req.body.age
+  var quote = new Quote({
+    name: req.body.name, quote: req.body.quote
   });
-  mongoose.save(function(err) {
+  quote.save(function(err) {
     if(err) {
       console.log('something went wrong');
     } else { 
-      console.log('successfully added a mongoose!');
+      console.log('successfully added a quote!');
       res.redirect('/');
     }
   })
 })
 
-app.get('/mongooses/edit/:id', function(req, res) {  
+
+
+
+app.get('/quotes/edit/:id', function(req, res) {  
   Quote.findOne({_id: req.params.id}, function(err, mongoose){
     res.render('edit', {mongoose})
   })
 })
 
-app.post('/mongooses/destroy/:id', function(req, res) {
+app.post('/quotes/destroy/:id', function(req, res) {
   console.log("POST DATA", req.body);
   // ...delete 1 record by a certain key/vaue.
   Quote.remove({_id: req.params.id}, function(err){
@@ -80,7 +84,7 @@ app.post('/mongooses/destroy/:id', function(req, res) {
   })
 })
 
-app.post('/mongooses/:id', function(req, res) {
+app.post('/quotes/:id', function(req, res) {
   console.log("POST DATA", req.body);
   Quote.findOne({_id: req.params.id}, function(err, mongoose){
     console.log("mongoose", mongoose);
