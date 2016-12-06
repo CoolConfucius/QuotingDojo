@@ -18,7 +18,7 @@ var QuoteSchema = new mongoose.Schema({
  content: String,
  date: { type: Date, default: Date.now }, 
  likes: { type: Number, default: 0 }
-})
+}, {timestamps: true} )
 mongoose.model('Quote', QuoteSchema); 
 var Quote = mongoose.model('Quote');
 

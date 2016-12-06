@@ -15,7 +15,7 @@
 
     <% quotes.forEach(function(quote, index){ %>
       <p>"<%= quote.content %>"</p>
-      <p>-<%= quote.name %> at <%= quote.date %></p>
+      <p>-<%= quote.name %> at <%= quote.createdAt %></p>
       <p>Likes: <%= quote.likes %></p> 
       <a href="/upvote/<%= quote._id %>">Upvote</a>
       <hr/>
