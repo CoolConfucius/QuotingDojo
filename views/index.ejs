@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Index</title>
+  <title>QuotingDojo</title>
   <style>
     form label, form input {
       display: block;
@@ -10,34 +10,22 @@
   </style>
 </head>
 <body>
-  <h1>Index</h1>
+  <h1>Welcome to QuotingDojo</h1>
 
- <!--  <div class="container">
+  <div class="container">
     <form action="/users" method="post">
       
       <label>
-        Your Name: <input type="text" name="name">
+        Your name: <input type="text" name="name" value="Trey">
       </label>
       <label>
-        Your Age: <input type="number" name="age">
+        Your qoute: 
+        <textarea name="quote" id="" cols="30" rows="10" value="I make lame jokes"></textarea>
       </label>
       
-      <input type="submit" value="Submit">
+      <input type="submit" value="Add my quote!">
+      <a href="/quotes">Skip to quotes!</a>
     </form>
-
-    <%= /*users*/ %> 
-  -->
-    <!-- <form action="/mongooses/new" method="get">
-      <input type="submit" value="New">
-    </form> -->
-    <a href="/mongooses/new">new</a>
-    <br>
-    <hr>
-
-    <% mongooses.forEach(function(element, index){ %>
-        <a href="/mongooses/<%= element._id %>">Name: <%= element.name %></a>
-        <br/>
-    <% }) %>
   </div>
 </body>
 </html>
