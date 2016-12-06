@@ -77,7 +77,7 @@ app.get('/upvote/:id', function(req, res){
       if(err) {
         console.log('something went wrong');
       } else { 
-        console.log('successfully edited a quote!');
+        console.log('successfully upvoted a quote!');
         res.redirect('/quotes');
       }
     })
