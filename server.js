@@ -65,12 +65,12 @@ app.post('/quotes', function(req, res) {
 app.get('/upvote/:id', function(req, res){
   Quote.findOne({_id: req.params.id}, function(err, quote){
     quote.likes++;
-    mongoose.save(function(err) {
+    quote.save(function(err) {
       if(err) {
         console.log('something went wrong');
       } else { 
         console.log('successfully edited a quote!');
-        res.redirect('/');
+        res.redirect('/quotes');
       }
     })
   })
